@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+</head>
+<body>
+<ul>
+    {% for student in students %}
+        <li>{{ student.s_name }}</li>
+    {% empty %}
+        <h1>someone is missing</h1>
+
+    {% endfor %}
+
+</ul>
+<hr>
+
+<ul>
+    {% for student in students %}
+        <li>{{ forloop.counter0 }}:{{ student.get_name }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+<h3>{{ students.0.s_name }}</h3>
+
+<hr>
+<h3>{{ student_dict.hobby }}</h3>
+<h3>{{ student_dict.hobby|lower }}</h3>
+<h3>{{ student_dict.hobby|upper }}</h3>
+
+<hr>
+<ul>
+    {% for student in students %}
+        {% if forloop.first %}
+            <li style="color:red">{{ student.s_name }}</li>
+        {% elif forloop.last %}
+            <li style="color:green">{{ student.s_name }}</li>
+        {% else %}
+            <li>{{ student.s_name }}</li>
+        {% endif %}
+
+    {% endfor %}
+
+{# 单行注释 #}
+{% comment %}
+<h1>dfdfdf</h1>
+<h2>dfdfdf</h2>
+{% endcomment %}
+<h4>{{ count }}</h4>
+
+<h4>{% widthratio count 5 1 %}</h4>
+<h4>{% widthratio count 1 5 %}</h4>
+<h4>{{ count|add:2 }}</h4>
+<h4>{{ count|add:-2 }}</h4>
+
+</ul>
+
+
+<hr>
+<ul>
+    {% for student in students %}
+        {% if forloop.counter|divisibleby:2 %}
+            <li style="color:red">{{ student.s_name }}</li>
+        {% else %}
+            <li style="color:#89cb89">{{ student.s_name }}</li>
+        {% endif %}
+
+    {% endfor %}
+</ul>
+{# 第五行变色 #}
+<hr>
+<ul>
+    {% for student in students %}
+        {% ifequal forloop.counter 5 %}
+            <li style="color:blue">{{ student.s_name }}</li>
+            {% else %}
+            <li style="color:yellow">{{ student.s_name }}</li>
+        {% endifequal %}
+    {% endfor %}
+
+</ul>
+
+<hr>
+{#<p>{{ code|safe }}</p>#}
+{% autoescape off %}
+    {{ code  }}
+{% endautoescape %}
+
+</body>
+</html>
