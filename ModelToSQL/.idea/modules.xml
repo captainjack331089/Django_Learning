@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ModelRelationship/.idea/ModelRelationship.iml" filepath="$PROJECT_DIR$/../ModelRelationship/.idea/ModelRelationship.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ModelToSQL.iml" filepath="$PROJECT_DIR$/.idea/ModelToSQL.iml" />
     </modules>
   </component>

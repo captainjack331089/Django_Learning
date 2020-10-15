@@ -1,0 +1,200 @@
+- CS/BS 
+  - 客户端和服务器的交互模型
+    - CLient
+      - Browser
+    - Server
+      - Web后端
+        - python	
+          - django
+          - flask
+        - java
+        - php
+        - go
+
+
+
+- MVC
+  - 软体架构风格
+    - 不是标准
+  - 将数据操作，业务处理，界面展示进行了拆分
+  - 核心思想： 解耦合
+    - 松耦合
+  - Model
+    - 模型
+    - 封装数据的交互操作
+      - CRUD（Create Retreive Update Delete）
+  - VIew
+    - 视图
+    - 用来将数据呈现给用户
+  - Controller
+    - 控制器
+    - 接受用户的输入
+    - 用来协调model和view的关系，并对数据进行操作，筛选
+  - 流程
+    - 控制器接受用户请求
+    - 调用模型，获取数据
+    - 控制器将数据展示到视图中
+
+
+
+- MTV
+  - 本质就是MVC，变种
+  - Model
+    - 同mvc中的model
+  - Template
+    - 模版
+    - 只是一个html，充当mvc中view的角色
+  - Views
+    - 视图函数
+    - 相当于mvc中的controller
+
+
+
+- Django
+  - 基于python重量级web框架，2005开源，新闻站点
+    - 重量级
+    - 替开发者做了很多选择和功能
+  - HelloDjango
+    - 虚拟环境
+      - mkvirtualenv
+      - deactivate
+      - workon
+      - rmvirtualenv
+    - 安装
+      - pip install django==2.1.1
+      - pip install django==2.1.1 -i https://...
+    - 创建项目
+      - django admin startproject xxx
+      - 项目结构
+        - xxx 
+          - manage.py
+            - 管理整个项目的文件
+          - xxx
+            - ____init____.py
+            - settings ： 项目全局配置文件
+            - url ： 跟路由
+            - wsgi ：web网关服务端口，用在以后部署
+    - 启动项目
+      - python manage.py runserver
+        - 使用开发者服务器启动项目
+        - 默认会运行在本机的8000端口上
+        - 还可以添加参数
+        - [[ip:] port] 
+          - 0.0.0.0
+          - 代表本机所有ip
+    - 创建一个应用
+      - python manage.py startapp App
+      - App结构
+        - ____init____
+        - views
+          - 视图函数
+        - models
+          - 模型
+        - admin
+          - 做后台管理
+        - apps
+          - 应用配置
+        - tests
+          - 单元测试
+        - migrations
+          - ____init____
+          - 迁移目录
+      - 第一件事
+        - 将应用注册到项目的settings中INSTALL_APPS中
+    - 请求流程
+      - browser-->urls
+      - urls-->views
+      - Views-->models
+      - Models-->views
+      - Views-->response
+    - 编写第一个请求
+      - 编写第一个路由
+        - urlpatterns
+        - url(p1,p2)
+        - p1正则匹配规则
+        - p2对应的视图视图函数
+      - 编写视图函数
+        - 本质上还是一个函数
+        - 只是默认第一个参数是一个request
+        - 必须返回一个response
+          - HTTPResponse
+          - Render
+            - 渲染（模版）
+            - 简写
+    - 连接数据库
+      - 默认在django中集成数据库
+        - SQlite
+        - 轻量级数据库
+        - 没有用户名密码
+        - 常用的场景 android ios wp
+      - 修改数据库
+        - 在settings的databases里修改
+        - 实际上都是关系型数据库
+        - mysql
+          - 驱动
+            - mysqlclient
+            - mysql-python
+            - pymysql
+              - 可以伪装
+              - install_as_mysqldb()
+          - USER
+          - PASSWORD
+          - HOST
+          - PORT
+          - NAME
+          - ENGINE
+      - 迁移
+        - 生成迁移
+          - python manage.py makemigrations
+        - 执行迁移
+          - python manage.py migrate
+          - 执行在会在数据库中产生变化
+    - 数据操作
+      - 增删改查
+      - 存储数据
+        - 创建对象进行save（）
+      - 数据查询
+        - 模型.objects.all()
+        - 模型.objects.get()
+      - 更新
+        - 基于查询
+        - save()
+      - 删除
+        - 基于查询
+        - Save()
+    - 显示在模版中
+      - 先挖坑
+        - {{ var }}
+      - 再填坑
+        - 渲染模版的时候传递上下文进来
+        - 上下文是一个字典
+        - key就是var, vlaue就是要传入的值
+      - 模版的兼容性很强
+        - 不传不会报错
+        - 多传也会自动优化
+      - 浏览器不认模版
+        - 在到达浏览器之前，已经进行了转换，将模版语言转换成HTML
+      - for支持
+    - Python manage.py shell
+      - django终端
+      - 集成了django环境的python终端
+      - 通常用来调试
+    - 数据级联
+      - ForeignKey
+        - 一对多
+        - 多记一
+        - 一获取多
+          - 多的set
+        - 多获取一
+          - 就是一个书写的属性
+
+
+
+### PROJECT
+
+- 创建第一个hello页面
+- 创建一个学生页面
+- 读取/渲染一个学生页面
+- 更新学生信息
+- 删除学生信息
+- 创建一个班级页面，并包含班级和学生的信息以及关系

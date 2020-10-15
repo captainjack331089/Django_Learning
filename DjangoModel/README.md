@@ -1,0 +1,177 @@
+- MTV流程
+  - 组成
+    - model
+    - view
+    - template
+    - urls
+  - django中流程
+    - 客户端->urls
+    - Urls ->  views
+    - Views-> models
+    - Models -> views
+    - Views -> template
+    - template ->  客户端
+
+
+
+
+
+- Model
+  - 模型
+  - Django中
+    - 数据操作封装
+    - 定义数据表结构
+      - 模型类
+      - 表
+      - 属性
+      - 字段
+    - 定义模型
+      - 继承自Model
+        - class Meta: 元信息
+        - Db_table 表名
+      - 定义字段
+        - 字段类型
+          - CharField
+          - TextField
+          - IntegerField
+          - FloatField
+          - BooleanField
+          - DecimalField
+          - NullBooleanField
+          - AutoField
+          - FileField
+          - ImageField
+        - 字段约束
+          - default
+          - unique
+          - index
+          - Primary_key
+          - Db_column
+    - 映射到库中
+      - 生成迁移文件
+      - 执行迁移
+      - 前提
+        - 数据库配置完毕
+          - 默认配置的sqlite
+          - 自主配置mysql
+            - 引擎
+            - 数据库名
+            - 用户名
+            - 密码
+            - 主机
+            - 端口 
+            - 驱动，需要伪装
+    - ORM：object relational mapping(对象关系映射)
+      - 将业务逻辑和SQL语句进行解耦
+        - 核心思想解耦合
+      - 可以简单理解为翻译机
+    - CRUD
+      - CREATE
+        - save
+        - 创建对象
+          - 实例化对象，设置属性
+          - 创建对象，传入属性
+          - 使用Models.objects.create()
+          - 自己封装类方法创建
+          - 在Manager中封装方法创建
+      - RETREIVE
+        - 查询句柄
+          - objects
+            - 隐性属性
+            - Manager实例
+            - 操作都封装在里面
+              - 获取查询结果集(QuerySet)
+                - all
+                - filter
+                - exclude
+                - order by
+                - values
+                - 切片
+                  - 不支持负数
+                  - 实际上相当于limit offset
+                  - 懒查询 
+                    - 观察者模型
+                    - 发布者订阅者
+                    - 广播
+              - 获取单个对象
+                - get
+                  - 不存在会抛异常 DoesNotExist
+                  - 存在多于一个MultipleObjectsReturned
+                  - 使用这个函数，记得捕获异常
+                - last
+                - first
+                  - 坑点
+                  - 可能出现第一个和最后一个是一样
+                  - 需要主动进行排序
+              - 条件
+                - 属性_操作符 = 临界值
+                  - gt
+                  - gte
+                  - lt
+                  - lte
+                  - in
+                  - exact
+                  - startswith
+                  - endswith
+                  - contains
+                  - ignore
+                    - iexact
+                    - icontains
+                    - istartswith
+                    - iendswith
+              - 条件升级
+                - F
+                  - 获取字段信息
+                  - 通常用在模型的自我属性比较
+                  - 支持算术运算
+                - Q
+                  - 条件封装
+                  - 支持逻辑运算
+                    - 与或非
+              - 内置函数
+                - count
+                - exists
+              - 聚合函数
+                - 操作列
+                - Max
+                - Avg
+                - Min
+                - Sum
+                - Count
+                - ...
+      - UPDATE
+        - 基于查询
+        - save
+      - DELETE
+        - 基于查询
+        - delete
+
+
+
+- 属性
+  - 显性属性
+    - 开发者手动声明的属性
+  - 隐性属性
+    - 没有声明名，父类中也不存在，动态产生出来的
+    - 如果开发者主动声明了这些属性，隐性属性自己就不再生成了
+- 重要数据处理
+  - 逻辑字段
+  - Is_delete
+  - 自定义Manager实现统一封装
+    - 重写get_queryset
+
+
+
+
+
+### PROJECTS
+
+- 创建用户信息
+  - 用户名
+  - 密码
+  - 获取用户信息
+- 创建客户信息
+  - 客户名
+  - 订单号
+- 创建班级信息
+  - 班级和 学生关系
