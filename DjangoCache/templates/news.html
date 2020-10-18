@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+<body>
+<ul>
+    {% for news in news_list %}
+
+        <li>{{ news }}</li>
+
+    {% endfor %}
+        <li><a href="{% url 'App:cals' %}">英超联赛马上重启</a></li>
+
+</ul>
+
+</body>
+</html>
