@@ -17,6 +17,8 @@ urlpatterns = [
 
     url(r'^getstudentswpage/', views.get_students_with_page, name='get_students_with_page'),
 
+    url(r'^getcode/', views.get_code, name='get_code'),
+
 ]
 
 app_name= 'App'
