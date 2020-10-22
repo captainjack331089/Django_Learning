@@ -1,4 +1,4 @@
-"""DjangoPlugin URL Configuration
+"""ShoppingSite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/',include('App.urls',namespace='app')),
+    path('shoppingsite/', include('App.urls',namespace='shoppingsite')),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/DjangoPlugin.iml" filepath="$PROJECT_DIR$/.idea/DjangoPlugin.iml" />
+      <module fileurl="file://$USER_HOME$/python_Excel/.idea/python_Excel.iml" filepath="$USER_HOME$/python_Excel/.idea/python_Excel.iml" />
+    </modules>
+  </component>
+</project>
