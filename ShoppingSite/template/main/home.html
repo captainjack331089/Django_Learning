@@ -14,7 +14,7 @@
 
 {% block content %}
     <div id="home">
-{# 首页 顶部轮播 #}
+    {# 首页 顶部轮播 #}
         <div class="swiper-container"  id="topSwiper">
             <div class="swiper-wrapper">
                 {% for main_wheel in main_wheels %}
@@ -26,7 +26,7 @@
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
         </div>
-{# 首页顶部的导航 #}
+    {# 首页顶部的导航 #}
         <div class="topMenu">
             <nav>
                 <ul>
@@ -50,6 +50,101 @@
                 {% endfor %}
             </div>
         </div>
-    
+    {# 首页的商店 #}
+        <div class="CVS">
+            <h2>
+                <img src="{{ main_shop0_1.0.img }}" width="500" height="100" alt="{{ main_shop0_1.0.name }}">
+            </h2>
+
+        <fieldset>
+            {% for mains_shop in main_shop1_3 %}
+                <a href="#">
+                    <img src="{{ mains_shop.img }}" width="230" height="120" alt="{{ mains_shop.name }}">
+                </a>
+            {% endfor %}
+        </fieldset>
+
+        <ul>
+            {% for main_shop in main_shop3_7 %}
+                <li>
+                    <a href="#">
+                        <img src="{{ main_shop.img }}" width="150.5" height="70" alt="{{ main_shop.name }}">
+                        <span>{{ main_shop.name }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <ol>
+            {% for main_shop in main_shop7_11 %}
+                <li>
+                    <a href="#">
+                        <img src="{{ main_shop.img }}"  alt="{{ main_shop.name }}">
+                        <span>{{ main_shop.name }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    {# 首页的主显示 #}
+        <ul>
+            {% for main_show in main_shows %}
+                <li class="mainInfo">
+                    <section>
+                        <h3>{{ main_show.name }}
+                            <a href="#">更多</a>
+                            <span></span>
+                        </h3>
+
+                        <div>
+                            <a href="#">
+                                <img src="{{ main_show.img }}" alt="{{ main_show.name }}">
+                            </a>
+                        </div>
+
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ main_show.img1 }}" alt="{{ main_show.longname1 }}">
+                                    <p class="description">{{ main_show.longname1 }}</p>
+                                    <span>{{ main_show.price1 }}</span>
+                                    <s>{{ main_show.marketprice1 }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ main_show.img2 }}" alt="{{ main_show.longname2 }}">
+                                    <p class="description">{{ main_show.longname2 }}</p>
+                                    <span>{{ main_show.price2 }}</span>
+                                    <s>{{ main_show.marketprice2 }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ main_show.img3 }}" alt="{{ main_show.longname3 }}">
+                                    <p class="description">{{ main_show.longname3 }}</p>
+                                    <span>{{ main_show.price3 }}</span>
+                                    <s>{{ main_show.marketprice3 }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                        </ul>
+
+                    </section>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
     </div>
 {% endblock %}
