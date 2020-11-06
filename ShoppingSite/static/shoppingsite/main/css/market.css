@@ -195,8 +195,18 @@ section menu ul li a img {
     color: red;
 }
 
+.price > span:before {
+    content: "$";
+    color: red;
+}
+
 .price > s {
     color: grey;
+}
+
+.price > s:before {
+    color:gray;
+    content:"$";
 }
 
 /**添加到购物车****/
@@ -215,7 +225,7 @@ section > button {
     color: red;
     display: inline-block;
     text-align: center;
-    line-height: 0.55rem;
+    line-height: 0.5rem;
     font-weight: 900;
     width: 0.5rem;
     height: 0.5rem;
@@ -251,7 +261,7 @@ section menu > div > div {
     padding-bottom: 0.3rem;
 }
 
-section menu > div > div > a > span {
+section menu > div > div > a > button {
     border: 0.04rem solid #e0e0e0;
     padding: 0.1rem 0.2rem;
     margin-left: 0.3rem;
