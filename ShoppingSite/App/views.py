@@ -1,11 +1,13 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
 
-from App.models import MainWheel, MainNav, MainMustBuy, MainShop, Mainshow, FoodType, Goods
-from App.views_constant import ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN
+from App.models import MainWheel, MainNav, MainMustBuy, MainShop, Mainshow, FoodType, Goods, AAAUser
+from App.views_constant import ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN, \
+    HTTP_USER_EXIST, HTTP_OK, HTTP_EMAIL_EXIST
+from App.views_helper import hash_str
 
 
 def home(request):
@@ -104,3 +106,80 @@ def cart(request):
 
 def mine(request):
     return render(request, "main/mine.html")
+
+
+def register(request):
+    if request.method == "GET":
+
+        data = {
+            "title": "注册",
+        }
+
+        return render(request, 'user/register.html', context=data)
+    elif request.method == 'POST':
+
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        icon = request.FILES.get("icon")
+
+        password = hash_str(password)
+
+        user = AAAUser()
+        user.u_username = username
+        user.u_password = password
+        user.u_email = email
+        user.u_icon = icon
+
+        user.save()
+
+        return redirect(reverse("shoppingsite:login"))
+
+
+def login(request):
+
+    if request.method == "GET":
+        data = {
+            "title": "登录",
+        }
+        return render(request, 'user/login.html', data)
+    elif request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        return HttpResponse("登录成功")
+
+
+def check_user(request):
+    username = request.GET.get("username")
+    users = AAAUser.objects.filter(u_username=username)
+
+    data = {
+        "status": HTTP_OK,
+        "msg": 'valid username',
+    }
+
+    if users.exists():
+        data['status'] = HTTP_USER_EXIST
+        data['msg'] = 'user already exists'
+    else:
+        pass
+
+    return JsonResponse(data=data)
+
+
+def check_email(request):
+    email = request.GET.get("email")
+    emails = AAAUser.objects.filter(u_email=email)
+
+    data = {
+        "status":HTTP_OK,
+        "msg": 'valid_email',
+    }
+
+    if emails.exists():
+        data['status'] = HTTP_EMAIL_EXIST
+        data['msg'] = 'email already existis'
+    else:
+        pass
+
+    return JsonResponse(data=data)

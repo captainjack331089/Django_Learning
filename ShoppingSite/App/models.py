@@ -112,3 +112,4 @@ class AAAUser(models.Model):
 
     class Meta:
         db_table = 'aaa_user'
+
