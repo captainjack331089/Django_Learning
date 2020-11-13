@@ -5,9 +5,14 @@
     {{ block.super }}
 {% endblock %}
 
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'shoppingsite/user/js/login.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="container">
-        <form method="post" action="{% url 'shoppingsite:login' %}">
+        <form method="post" action="{% url 'shoppingsite:login' %}" onsubmit="return parse_data()">
 
             {% csrf_token %}
 

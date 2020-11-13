@@ -1,3 +1,5 @@
+from django.contrib.auth.hashers import make_password, check_password
+from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
@@ -8,6 +10,7 @@ from App.models import MainWheel, MainNav, MainMustBuy, MainShop, Mainshow, Food
 from App.views_constant import ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN, \
     HTTP_USER_EXIST, HTTP_OK, HTTP_EMAIL_EXIST
 from App.views_helper import hash_str
+from ShoppingSite.settings import MEDIA_KEY_PREFIX
 
 
 def home(request):
@@ -105,7 +108,20 @@ def cart(request):
 
 
 def mine(request):
-    return render(request, "main/mine.html")
+    user_id = request.session.get('user_id')
+
+    data = {
+        'title':'我的',
+        'is_login': False,
+    }
+
+    if user_id:
+        user = AAAUser.objects.get(pk=user_id)
+        data['is_login'] = True
+        data['username'] = user.u_username
+        data['icon'] = MEDIA_KEY_PREFIX + user.u_icon.url
+
+    return render(request, "main/mine.html", context=data)
 
 
 def register(request):
@@ -123,7 +139,7 @@ def register(request):
         password = request.POST.get("password")
         icon = request.FILES.get("icon")
 
-        password = hash_str(password)
+        password = make_password(password)
 
         user = AAAUser()
         user.u_username = username
@@ -146,7 +162,20 @@ def login(request):
     elif request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        return HttpResponse("登录成功")
+
+        users = AAAUser.objects.filter(u_username=username)
+        if users.exists():
+            user  = users.first()
+            if check_password(password, user.u_password):
+
+                request.session['user_id'] = user.id
+
+                return redirect(reverse('shoppingsite:mine'))
+            else:
+                print('password wrong')
+                return redirect(reverse('shoppingsite:login'))
+        print('user not exist')
+        return redirect(reverse('shoppingsite:login'))
 
 
 def check_user(request):
@@ -183,3 +212,20 @@ def check_email(request):
         pass
 
     return JsonResponse(data=data)
+
+
+def logout(request):
+    request.session.flush()
+
+    return redirect(reverse('shoppingsite:mine'))
+
+
+def send_email(request):
+    subject = 'aaa activate'
+    message = "<h1>do you miss me</h1>"
+    from_email = "qfhjack@gmail.com"
+    recipient_list = ['sharonzhao83@gmail.com','fahaoq@mtu.edu']
+
+
+    send_mail(subject, message=message, html_message=message, from_email=from_email, recipient_list=recipient_list)
+    return HttpResponse("send success")

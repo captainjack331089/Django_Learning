@@ -13,6 +13,9 @@ urlpatterns = [
     url(r'^login/', views.login, name='login'),
     url(r'^checkuser/', views.check_user, name='check_user'),
     url(r'^checkemail/', views.check_email, name='check_email'),
+
+    url(r'^logout/', views.logout,name='logout'),
+    url(r'^sendemail/', views.send_email),
 ]
 
 app_name = 'app'

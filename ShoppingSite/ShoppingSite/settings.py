@@ -131,7 +131,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_KEY_PREFIX = "/static/uploads/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/uploads')
 
 INTERNAL_IPS = ('127.0.0.1', 'localhost')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'qfhjack@gmail.com'
+EMAIL_HOST_PASSWORD = 'ltpphxshmzuusden'
+EMAIL_USE_TLS = True
